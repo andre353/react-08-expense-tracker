@@ -28,9 +28,19 @@ export const GlobalProvider = ({ children }) => {
         })
     }
 
+    function addTransaction(transaction) {
+        dispatch({
+            type: 'ADD_TRANSACTION',
+            payload: transaction
+        })
+    }
+
+
+
     return (<GlobalContext.Provider value={{
         // this is the way to access states fields from any component by means of hook
         transactions: state.transactions,
-        deleteTransaction
+        deleteTransaction,
+        addTransaction,
     }}>{children}</GlobalContext.Provider>)
 }
