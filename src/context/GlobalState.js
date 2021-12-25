@@ -1,5 +1,5 @@
-import React, { createContext, useReducer } from 'react'
-import appReducer from './AppReducer'
+import React, { createContext, useReducer } from 'react';
+import appReducer from './AppReducer';
 
 // Initial state
 const initialState = {
@@ -12,15 +12,25 @@ const initialState = {
 }
 
 // Create context
-export const GlobalContext = createContext(initialState)
+export const GlobalContext = createContext(initialState);
 
 // Provider component
 export const GlobalProvider = ({ children }) => {
     // state is the object that contains the appReducer file fields
-    const [state, dispatch] = useReducer(appReducer, initialState)
+    // dispatch = actions arriving to the AppReducer.js
+    const [state, dispatch] = useReducer(appReducer, initialState);
+
+    // actions
+    function deleteTransaction(id) {
+        dispatch({
+            type: 'DELETE_TRANSACTION',
+            payload: id
+        })
+    }
 
     return (<GlobalContext.Provider value={{
         // this is the way to access states fields from any component by means of hook
-        transactions: state.transactions
+        transactions: state.transactions,
+        deleteTransaction
     }}>{children}</GlobalContext.Provider>)
 }
