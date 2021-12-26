@@ -6,8 +6,12 @@ const morgan = require('morgan');
 
 dotenv.config({ path: './config/config.env' });
 
+const transactions = require('./routes/transactions');
+
 // Initialize our express app
 const app = express();
+
+app.use('/api/v1/transactions', transactions);
 
 // route
 app.get('/', (req, res) => res.send('Hello'));
